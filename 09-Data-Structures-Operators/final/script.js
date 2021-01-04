@@ -487,6 +487,8 @@ const game = {
   },
 };
 
+
+
 /*
 // 1.
 for (const [i, player] of game.scored.entries())
@@ -594,7 +596,7 @@ for (const [i, el] of menu.entries()) {
 ///////////////////////////////////////
 // Coding Challenge #1
 
-/* 
+/*
 We're building a football betting app (soccer for my American friends 😅)!
 
 Suppose we get data from a web service about a certain game (below). In this challenge we're gonna work with the data. So here are your tasks:
