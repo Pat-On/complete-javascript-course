@@ -564,7 +564,7 @@ const overalBalance = accounts
   .map(acc => acc.movements)
   .flat()
   .reduce((acc, mov) => acc + mov, 0);
-console.log(overalBalance);
+console.log(overalBalance); 
 
 // flatMap
 const overalBalance2 = accounts
