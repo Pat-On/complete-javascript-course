@@ -198,19 +198,19 @@ dogs.forEach(dog => console.log(`Recommended portion for dog in grams ${dog.reco
 //   so you first need to find Sarah in the owners array, and so this one is a bit tricky(on purpose) 🤓
 console.log("*2*".repeat(40))
 
-// for (let item of dogs) {
-//   if (item.owners.includes('Sarah')) {
-//     if (item.recommendedFood < item.curFood) console.log("Dog eat to much")
-//     if (item.recommendedFood > item.curFood) console.log("Dog eat to less")
-//     if (item.recommendedFood === item.curFood) console.log("Dog eat proper portion")
-//   }
-// }
+for (let item of dogs) {
+  if (item.owners.includes('Sarah')) {
+    if (item.recommendedFood < item.curFood) console.log("Dog eat to much")
+    if (item.recommendedFood > item.curFood) console.log("Dog eat to less")
+    if (item.recommendedFood === item.curFood) console.log("Dog eat proper portion")
+  }
+}
 
-dogs.forEach(dog => {
-  if (dog.recommendedFood < dog.curFood) console.log("Dog eat to much")
-  if (dog.recommendedFood > dog.curFood) console.log("Dog eat to less")
-  if (dog.recommendedFood === dog.curFood) console.log("Dog eat proper portion")
-})
+// dogs.forEach(dog => {
+//   if (dog.recommendedFood < dog.curFood) console.log("Dog eat to much")
+//   if (dog.recommendedFood > dog.curFood) console.log("Dog eat to less")
+//   if (dog.recommendedFood === dog.curFood) console.log("Dog eat proper portion")
+// })
 
 // 3. Create an array containing all owners of dogs who eat too much('ownersEatTooMuch') 
 // and an array with all owners of dogs who eat too little('ownersEatTooLittle').
@@ -270,7 +270,7 @@ console.log("*6*".repeat(40))
 // for (let item of dogs) console.log(((item.recommendedFood * 0.90) <= item.curFood && (item.recommendedFood * 1.10) >= item.curFood))
 
 console.log(`Is there any dog eating OKAY amount of true? ${dogs.some(item =>
-  ((item.recommendedFood * 0.90) <= item.curFood && (item.recommendedFood * 1.10) >= item.curFood)) ? "Yes there is!" : "No there is none!"}`)
+  (item.recommendedFood * 0.90) <= item.curFood && (item.recommendedFood * 1.10) >= item.curFood) ? "Yes there is!" : "No there is none!"}`)
 
 
 // 7. Create an array containing the dogs that are eating an OKAY amount of food(try to reuse the condition used in 6.)
