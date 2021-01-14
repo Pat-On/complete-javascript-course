@@ -157,16 +157,85 @@ tabsContainer.addEventListener('click', function (e) {
   tabsContent.forEach(t => t.classList.remove('operations__content--active'))
   document.querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active')
-
-
-
-
 })
 
+// Menu Fade animation 
+const nav = document.querySelector('.nav'); // bubbling! NICE! 
 
 
-// Lectures 
-// 189 Building a Tabbed Component
+//refactoring! 
+
+// code to first solution! 
+// const handleHover = function (e, opacity) {
+//   if (e.target.classList.contains('nav__link')) {
+//     const link = e.target
+//     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+//     const logo = link.closest('.nav').querySelector('img');
+
+//     siblings.forEach(el => {
+//       if (el !== link) el.style.opacity = opacity;
+//     })
+//     logo.style.opacity = opacity;
+//   }
+// }
+
+// // First solution to call function - ugly one! 
+// nav.addEventListener('mouseover', function (e) {
+//   handleHover(e, 0.5);
+// });
+// nav.addEventListener('mouseout', function (e) {
+//   handleHover(e, 1);
+// });
+
+
+/// Code to second solution this === to opacity
+const handleHover = function (e, opacity) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = this;
+    })
+    logo.style.opacity = this;
+  }
+}
+
+// Second solution with .bind() method => new copy=(f)
+// passing 'argument' into the handler function
+// !IMPORTANT You can pass only one argument inside the handler function - real one - event. 
+// !IMPORTANT to pass second argument we can use this key word and .bind() method wow <3 array, object etc! WOW!
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+
+nav.addEventListener('mouseout', handleHover.bind(1));
+
+//Example to keep if I need to check it later! 
+// nav.addEventListener('mouseover', function (e) {
+//   // We do not have to use guard closure because 
+//   //there is no risk to click something else like span etc
+//   if (e.target.classList.contains('nav__link')) {
+//     const link = e.target // element with we are working. 
+//     // this is robust method because even if we are going to change something it is going to work
+
+
+//     const siblings = link.closest('.nav').querySelectorAll('.nav__link'); // aaa he forgot to add All
+//     const logo = link.closest('.nav').querySelector('img');
+
+//     console.log(link)
+//     console.log(siblings)
+//     console.log(logo)
+
+//     siblings.forEach(el => {
+//       if (el !== link) el.style.opacity = 0.5;
+//     })
+//     logo.style.opacity = 0.5;
+
+//   }
+// })
+
+
+
 
 
 
