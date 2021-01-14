@@ -54,7 +54,7 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-
+console.log(window.pageYOffset)
 /////////////////////////////////////////////////////
 // Button Scrolling
 btnScrollTo.addEventListener('click', function (e) {
@@ -62,7 +62,7 @@ btnScrollTo.addEventListener('click', function (e) {
   // Scrolling - old way by manual calculating of values
   // window.scrollTo(s1coords.left + window.pageXOffset, s1coords.top + window.pageYOffset)
 
-  // console.log(s1coords.top, window.pageYOffset)
+  // console.log("??????????????????" + s1coords.top, window.pageYOffset)
   console.log(s1coords.top + window.pageYOffset)
   window.scrollTo({
     left: s1coords.left + window.pageXOffset,
@@ -235,8 +235,65 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 // })
 
 
+// Sticky navigation 
+// scroll event he pointed that should be avoided, because it is not efficient! 
+// const initialCoords = section1.getBoundingClientRect();
+// console.log(initialCoords)
+
+// // we do not need event inside callback function, because w operate on window element so it is global one
+// window.addEventListener('scroll', function () {
+//   // console.log(window.scrollY)
+//   if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+//   else nav.classList.remove('sticky');
+// })
 
 
+
+
+// Sticky navigation: intersection Observer API
+// this is more efficient because we are going to get call only when the condition is "out or in"
+///////////////////////////////////////////////
+////exercises////
+
+// const obsCallback = function (entries, observer) {
+//   entries.forEach(entry =>
+//     console.log(entry))
+// };
+
+// const obsOptions = {
+//   root: null, // in case of null value we are going to observe  entire view port. 
+//   threshold: 0.1, // this is in percentage, so basically when element is going to triggered 
+//   // the call back function. at the specific percent. when object will intersect the target(?)
+// }
+
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+// observer.observe(section1)
+
+//real solution dedicated to page
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  // console.log(entry)
+
+  // very nice and clear solution! 
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null, //viewport again! 
+  threshold: 0,
+  rootMargin: `-${navHeight}px`  // because - responsive design 
+});
+
+headerObserver.observe(header)
+
+// this API is allowing us to observer changes 
+//to the way that different element intersect another element or view port?
+
+///////////////////////////////////////////////
 
 
 
