@@ -54,7 +54,7 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-console.log(window.pageYOffset)
+// console.log(window.pageYOffset)
 /////////////////////////////////////////////////////
 // Button Scrolling
 btnScrollTo.addEventListener('click', function (e) {
@@ -253,6 +253,9 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 // Sticky navigation: intersection Observer API
 // this is more efficient because we are going to get call only when the condition is "out or in"
 ///////////////////////////////////////////////
+// this API is allowing us to observer changes 
+//to the way that different element intersect another element or view port?
+
 ////exercises////
 
 // const obsCallback = function (entries, observer) {
@@ -290,11 +293,176 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 
 headerObserver.observe(header)
 
-// this API is allowing us to observer changes 
-//to the way that different element intersect another element or view port?
-
 ///////////////////////////////////////////////
 
+// Reveal sections
+const allSections = document.querySelectorAll('.section');
+
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  // console.log(entry);
+  if (!entry.isIntersecting) return
+  entry.target.classList.remove('section--hidden') // we removing that hidden class - very nice solution.
+  observer.unobserve(entry.target) // by this we are stopping observation of this object
+}
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null, //again vieport
+  threshold: 0.15, // boom at 15%
+})
+allSections.forEach(function (section) {
+  sectionObserver.observe(section);
+  // section.classList.add('section--hidden');
+})
+
+// it is possible to observe many objects by one observer! 
+
+
+//////////////////////////////////////////////////////////////
+// Lazy Loading images
+// this is great tool - performance - slow internet - slow devices
+const imgTargets = document.querySelectorAll('img[data-src]')
+// console.log(imgTargets);
+
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  // console.log(entry)
+
+  if (!entry.isIntersecting) return;
+
+  // Replace src with data=src
+  entry.target.src = entry.target.dataset.src;
+  // it is going to replace src with a link stored inside the data-src. Nice! 
+  // !IMPORTANT
+  // after the JS is going to finish loading new version of image it will trigger the load event
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+  observer.unobserve(entry.target);
+};
+
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px', // we want to hide the effect of lazy loading
+})
+
+imgTargets.forEach(img => imgObserver.observe(img));
+
+////////////////////////////////////////// 
+// Slider
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+
+const lengthSlides = slides.length;
+// console.log(slides.length)
+
+let curSlide = 0;
+
+slides.forEach((s, i) => (s.style.transform = `translateX(${100 * i}%)`));
+// So it is going to give us 0%; 100%, etc. cool
+
+// Next slide
+
+// REFACTORING
+const goToSlide = function (slide) {
+  slides.forEach(
+    (s, i) => s.style.transform = `translateX(${100 * (i - slide)}%)`)
+
+}
+const previousSlide = function () {
+  if (curSlide === 0) {
+    curSlide = lengthSlides - 1;
+  } else {
+    curSlide--
+  }
+  goToSlide(curSlide);
+  activateDot(slide);
+};
+const nextSlide = function () {
+  if (curSlide === lengthSlides - 1) {
+    curSlide = 0;
+  } else {
+    curSlide++
+  }
+  goToSlide(curSlide);
+  activateDot(slide);
+}
+
+btnRight.addEventListener('click', function () {
+  nextSlide();
+
+});
+
+btnLeft.addEventListener('click', previousSlide)
+
+// Arrow keys functionality
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'ArrowLeft') previousSlide();
+  e.key === 'ArrowRight' && nextSlide()
+})
+
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+// Dots container
+const dotContainer = document.querySelector('.dots');
+
+const createDots = function () {
+  slides.forEach(function (_, i) {
+    dotContainer.insertAdjacentHTML(
+      'beforeend',
+      `<button class="dots__dot" data-slide="${i}"></button>`
+    );
+  });
+};
+
+
+
+
+
+// activation the dots
+const activateDot = function (slide) {
+  document.querySelectorAll('.dots__dot')
+    .forEach(dot => dot.classList.remove('dots__dot--active'))
+
+  // selecting active one - he said it is going to be complicate
+  document
+    .querySelector(`.dots__dot[data-slide="${slide}"]`)
+    .classList.add('dots__dot--active')
+}
+
+
+
+// Again event delegation
+dotContainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('dots__dot')) {
+    const { slide } = e.target.dataset; // deconstruction of object - because the same
+    // exactly the same so there is no problem to do it. 
+
+    // const slide = e.target.dataset.slide;
+    goToSlide(slide);
+    activateDot(slide);
+  }
+})
+
+////////////////////////////////////////////////////////////////
+// activation function
+
+const init = function () {
+  goToSlide(0);
+  createDots();
+
+  activateDot(0);
+}
+
+init();
+
+
+// Making slider and all slides visible and smaller (work station ^^)
+// const slider = document.querySelector('.slider');
+// slider.style.transform = 'scale(0.4) translateX(-900px)';
+// slider.style.overflow = "visible";
 
 
 
