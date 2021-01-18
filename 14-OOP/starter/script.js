@@ -88,3 +88,64 @@ console.dir(h1) // h1 has 6 - 7 levels of prototyping wow!
 
 //functions
 console.dir(x => x + 1)
+
+///////////////////////////////////////
+// Coding Challenge #1
+
+/*
+1. Use a constructor function to implement a Car. A car has a make and a speed property. 
+The speed property is the current speed of the car in km/h;
+2. Implement an 'accelerate' method that will increase the car's speed by 10, and log the new speed to the console;
+3. Implement a 'brake' method that will decrease the car's speed by 5, and log the new speed to the console;
+4. Create 2 car objects and experiment with calling 'accelerate' and 'brake' multiple times on each of them.
+
+DATA CAR 1: 'BMW' going at 120 km/h
+DATA CAR 2: 'Mercedes' going at 95 km/h
+
+GOOD LUCK 😀
+*/
+
+//constructor function
+const Auto = function (make, speed) {
+    this.make = make;
+    this.speed = speed;
+}
+
+Auto.prototype.accelerate = function () {
+    this.speed += 1
+};
+Auto.prototype.break = function () {
+    this.speed -= 1
+};
+
+const bmw = new Auto("BMW", 50);
+const mercedes = new Auto("Mercedes", 100);
+
+
+console.log(bmw.speed);
+console.log(mercedes.speed);
+
+bmw.accelerate();
+bmw.accelerate();
+bmw.accelerate();
+bmw.accelerate();
+bmw.accelerate();
+bmw.accelerate();
+bmw.accelerate();
+bmw.accelerate();
+bmw.accelerate();
+
+console.log(bmw.speed)
+
+mercedes.accelerate();
+mercedes.accelerate();
+mercedes.accelerate();
+mercedes.accelerate();
+mercedes.accelerate();
+mercedes.accelerate();
+mercedes.accelerate();
+mercedes.accelerate();
+mercedes.accelerate();
+mercedes.accelerate();
+
+console.log(mercedes.speed)
