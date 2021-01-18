@@ -158,32 +158,89 @@ console.log(mercedes.speed)
 
 
 // Class declaration 
+// class PersonCL {
+//     constructor(firstName, birthYEar) {
+//         this.firstName = firstName;
+//         this.birthYEar = birthYEar
+//     }
+//     // this is going to be added  to the prototype 
+//     calcAge() {
+//         console.log(2037 - this.birthYEar)
+//     }
+// }
+
+// const jessica = new PersonCL('Jessica', 1996);
+
+// jessica.calcAge();
+
+// console.log(jessica.__proto__ === PersonCL.prototype);
+
+// PersonCL.prototype.greet = function () {
+//     console.log(`hey ${this.firstName}`);
+// }
+
+// jessica.greet()
+
+// console.log(jessica.__proto__ === PersonCL.prototype);
+//1. Classes are NOT hoisted
+// 2. Classes are first-class citizens
+// 3classes are executed in strict mode
+
+// 209 Setters and Getters
+console.log('*'.repeat(60))
+
+const account = {
+    owner: 'Jonas',
+    movements: [200, 300, 400, 500],
+
+    get latest() {
+        return this.movements.slice(-1).pop();
+    },
+
+    set latest(mov) {
+        this.movements.push(mov);
+    },
+
+}
+
+console.log(account.latest);
+
+account.latest = 50;
+console.log(account.latest)
+console.log(account.movements)
+
+
+
+// WOW! setting a property that already exist - pattern! 
 class PersonCL {
-    constructor(firstName, birthYEar) {
-        this.firstName = firstName;
+    constructor(fullName, birthYEar) {
+        this.fullName = fullName;
         this.birthYEar = birthYEar
     }
     // this is going to be added  to the prototype 
     calcAge() {
         console.log(2037 - this.birthYEar)
     }
+
+    set fullName(name) {
+        console.log(name)
+        if (name.includes(' ')) this._fullName = name;
+        else alert(`${name} is not a full name`);
+    }
+
+    get fullName() {
+        return this._fullName;
+    }
 }
 
-const jessica = new PersonCL('Jessica', 1996);
-
+const jessica = new PersonCL('Jassica Davis', 1996);
+console.log(jessica);
 jessica.calcAge();
 
-console.log(jessica.__proto__ === PersonCL.prototype);
+// const walter = new PersonCL('walter', 1995);
+// console.log(walter)
+// nice, because of the set fullName we were manage to validate the Walter name, that is not full name.
+// It is handy! 
 
-PersonCL.prototype.greet = function () {
-    console.log(`hey ${this.firstName}`);
-}
-
-jessica.greet()
-
-console.log(jessica.__proto__ === PersonCL.prototype);
-//1. Classes are NOT hoisted
-// 2. Classes are first-class citizens
-// 3classes are executed in strict mode
-
-// 209 Setters and Getters
+console.log('*'.repeat(60))
+//  video 210 Static Methods
