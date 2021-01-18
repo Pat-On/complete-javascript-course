@@ -50,3 +50,41 @@ console.log(patryk.species)
 // this properties is inherited from proto
 console.log(patryk.hasOwnProperty('species'))
 console.log(patryk.hasOwnProperty('firstName'))
+
+//video 206
+console.log(patryk.__proto__)
+// object.prototype (top of prototype chain)
+console.log(patryk.__proto__.__proto__)
+console.log(Array.__proto__.__proto__)
+console.log(patryk.__proto__.__proto__.__proto__)
+
+console.log(Person.prototype.constructor)
+
+console.dir(Person.prototype.constructor)
+
+// functions are objects to so they have their own __proto__
+console.dir(Person.prototype.constructor.prototype)
+console.log(Person.prototype.constructor.prototype)
+
+// prototypes of Arrays - 
+const arr = [3, 4, 5, 6, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 7, 3, 4, 5, 6, 7]
+console.log(arr.__proto__)
+console.log(arr.__proto__ === Array.prototype)
+console.log(arr)
+
+
+//adding new methods to array - all arrays objects would get it!
+Array.prototype.unique = function () {
+    return [...new Set(this)];
+};
+
+console.log(arr.unique())
+
+const h1 = document.querySelector('h1')
+
+console.dir(h1) // h1 has 6 - 7 levels of prototyping wow! 
+
+
+
+//functions
+console.dir(x => x + 1)
