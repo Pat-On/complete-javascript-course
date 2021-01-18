@@ -48,8 +48,8 @@ Person.prototype.species = "homo sapiens";
 console.log(patryk.species)
 
 // this properties is inherited from proto
-console.log(patryk.hasOwnProperty('species'))
-console.log(patryk.hasOwnProperty('firstName'))
+console.log(patryk.hasOwnProperty('species'));
+console.log(patryk.hasOwnProperty('firstName'));
 
 //video 206
 console.log(patryk.__proto__)
@@ -149,3 +149,41 @@ mercedes.accelerate();
 mercedes.accelerate();
 
 console.log(mercedes.speed)
+
+
+//vid 208 ES6 Classes
+//class expression
+// const PersonCL = class {}
+
+
+
+// Class declaration 
+class PersonCL {
+    constructor(firstName, birthYEar) {
+        this.firstName = firstName;
+        this.birthYEar = birthYEar
+    }
+    // this is going to be added  to the prototype 
+    calcAge() {
+        console.log(2037 - this.birthYEar)
+    }
+}
+
+const jessica = new PersonCL('Jessica', 1996);
+
+jessica.calcAge();
+
+console.log(jessica.__proto__ === PersonCL.prototype);
+
+PersonCL.prototype.greet = function () {
+    console.log(`hey ${this.firstName}`);
+}
+
+jessica.greet()
+
+console.log(jessica.__proto__ === PersonCL.prototype);
+//1. Classes are NOT hoisted
+// 2. Classes are first-class citizens
+// 3classes are executed in strict mode
+
+// 209 Setters and Getters
