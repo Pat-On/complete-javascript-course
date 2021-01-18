@@ -218,6 +218,7 @@ class PersonCL {
         this.birthYEar = birthYEar
     }
     // this is going to be added  to the prototype 
+    // instance methods
     calcAge() {
         console.log(2037 - this.birthYEar)
     }
@@ -230,6 +231,13 @@ class PersonCL {
 
     get fullName() {
         return this._fullName;
+    }
+
+
+    //static method - added to the cosntructor
+    static hey() {
+        console.log("hey")
+        console.log(this)
     }
 }
 
@@ -244,3 +252,21 @@ jessica.calcAge();
 
 console.log('*'.repeat(60))
 //  video 210 Static Methods
+
+// examples: Number.parseFloat(12) or Array.from(document.querySelectorAll('h1))
+
+//it is not going to be inherited 
+Person.hey = function () {
+    console.log('Hey there!')
+}
+
+Person.hey()
+// jessica.hey() // it is not going to work because it is not going to be inherited because it is
+// stored inside the constructor obj not inside the prototype!
+
+PersonCL.hey();
+
+
+console.log('*'.repeat(60))
+
+// video 211 Object.create
