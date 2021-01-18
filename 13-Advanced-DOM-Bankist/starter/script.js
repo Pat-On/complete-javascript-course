@@ -417,10 +417,6 @@ const createDots = function () {
   });
 };
 
-
-
-
-
 // activation the dots
 const activateDot = function (slide) {
   document.querySelectorAll('.dots__dot')
