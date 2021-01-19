@@ -724,4 +724,146 @@ console.log('*'.repeat(30) + "Video 214 " + '*'.repeat(30))
 console.log('*'.repeat(30) + "Video 214 " + '*'.repeat(30))
 // video 218 Encapsulation: Protected Properties and Methods
 
+//summary
+//convention : _nameSomething - 'protected'
 
+class Account {
+    // 1) public firleds (instances)
+    locale = navigator.language;
+
+    //2) Private fields (instances)
+    #movements = []
+    #pin;
+
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        this.#pin = pin;
+
+        console.log("Hey")
+    }
+
+    // 3) public interface / public methods 
+    getMovements() {
+        return this.#movements;
+    }
+
+    deposit(val) {
+        this.#movements.push(val);
+        return this;
+    }
+
+    requestLoan(val) {
+        if (this.#approveLoan(val)) {
+            this.deposit(val);
+            console.log(`Loan approved`);
+        }
+        return this;
+    }
+    //4) Private methods
+    #approveLoan(val) {
+        return true;
+    }
+
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111)
+
+// console.log(jonas.#movements())
+console.log("LOL ")
+
+acc1.requestLoan(300)
+
+//chaining
+
+acc1.deposit(300).deposit(500).requestLoan(25000)
+
+
+
+
+console.log('*'.repeat(30) + "Video 222 " + '*'.repeat(30))
+///////////////////////////////////////
+// Coding Challenge #4
+
+/*
+1. Re-create challenge #3, but this time using ES6 classes:
+create an 'EVCl' child class of the 'CarCl' class
+
+    // Coding Challenge #3
+
+    /*
+    1. Use a constructor function to implement an Electric Car (called EV) as a CHILD "class" of Car. Besides a make and current speed, the EV also has the current battery charge in % ('charge' property);
+    2. Implement a 'chargeBattery' method which takes an argument 'chargeTo' and sets the battery charge to 'chargeTo';
+    3. Implement an 'accelerate' method that will increase the car's speed by 20, and decrease the charge by 1%. Then log a message like this: 'Tesla going at 140 km/h, with a charge of 22%';
+    4. Create an electric car object and experiment with calling 'accelerate', 'brake' and 'chargeBattery' (charge to 90%). Notice what happens when you 'accelerate'! HINT: Review the definiton of polymorphism 😉
+
+    DATA CAR 1: 'Tesla' going at 120 km/h, with a charge of 23%
+
+    GOOD LUCK 😀
+
+2. Make the 'charge' property private;
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the 'CarCl' class. They experiment with chining!
+
+DATA CAR 1: 'Rivian' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+*/
+
+
+class CarsClasssSolution {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+
+    accelerate() {
+        this.speed += 10;
+        console.log(`Speed ${this.speed} km/h`)
+    }
+
+    brake() {
+        this.speed -= 5;
+        console.log(`Speed ${this.speed} km/h`)
+    }
+
+    // 2. Add a getter called 'speedUS' which returns the current speed in mi / h(divide by 1.6);
+    // 3. Add a setter called 'speedUS' which sets the current speed in mi / h(but converts it to km / h 
+    //before storing the value, by multiplying the input by 1.6);
+
+    get speedUS() {
+        return this.speed / 1.6
+    }
+    // always one argument
+    set speedUS(speed) {
+        this.speed = speed * 1.6
+    }
+}
+
+const CarsProto = {
+    init(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    },
+
+    accelerate() {
+        this.speed += 10;
+        console.log(`Speed ${this.speed} km/h`)
+    },
+
+    brake() {
+        this.speed -= 5;
+        console.log(`Speed ${this.speed} km/h`)
+    },
+
+    // 2. Add a getter called 'speedUS' which returns the current speed in mi / h(divide by 1.6);
+    // 3. Add a setter called 'speedUS' which sets the current speed in mi / h(but converts it to km / h 
+    //before storing the value, by multiplying the input by 1.6);
+
+    get speedUS() {
+        return this.speed / 1.6
+    },
+    // always one argument
+    set speedUS(speed) {
+        this.speed = speed * 1.6
+    },
+}
