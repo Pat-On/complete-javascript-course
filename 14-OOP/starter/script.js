@@ -409,77 +409,250 @@
 
 
 console.log('*'.repeat(30) + "Video 213 " + '*'.repeat(30))
-// Video 213. Inheritance Between "Classes": Constructor Functions
+// // Video 213. Inheritance Between "Classes": Constructor Functions
 
-const Person = function (firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-}
+// const Person = function (firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+// }
 
-Person.prototype.calcAge = function () {
-    console.log(2037 - this.birthYear)
-}
-
-
-//because we want to extend the previous usability we need to put the same () and add additional one
-const Student = function (firstName, birthYear, course) {
-    // he said there is better way for it.     if You are going doubplication like this
-    // and the person is going to be changed then we will not get changes inside the student
-    // this.firstName = firstName;
-    // this.birthYear = birthYear;
-
-    //this solution is not going to work because we call it like regular function we neww to use new
-    // Person(firstName, birthYear)
-
-    // by .call() we can define as a first argument this key word and pass it to constructor of person <3
-    Person.call(this, firstName, birthYear);
-
-    this.course = course;
-}
-
-// joining prototypes of bth objects person to student connection
-// At this level student.prototypes it will return emty object
-// if we would do it after adding some methods, it would overwrite them again to empty object
-
-//linking prototype
-Student.prototype = Object.create(Person.prototype);
-// why we can not do something like this?:
-// Student.prototype = Person.prototype;  // it would point the same thing!
+// Person.prototype.calcAge = function () {
+//     console.log(2037 - this.birthYear)
+// }
 
 
-Student.prototype.introduce = function () {
-    console.log(`My name is ${this.firstName} and I study ${this.course}`)
-}
+// //because we want to extend the previous usability we need to put the same () and add additional one
+// const Student = function (firstName, birthYear, course) {
+//     // he said there is better way for it.     if You are going doubplication like this
+//     // and the person is going to be changed then we will not get changes inside the student
+//     // this.firstName = firstName;
+//     // this.birthYear = birthYear;
 
-const mike = new Student('Mike', 2020, 'Computer Science')
-console.log(mike)
-mike.introduce()
+//     //this solution is not going to work because we call it like regular function we neww to use new
+//     // Person(firstName, birthYear)
 
-// check time!
+//     // by .call() we can define as a first argument this key word and pass it to constructor of person <3
+//     Person.call(this, firstName, birthYear);
 
-console.log(mike.__proto__)
-console.log(mike.__proto__.__proto__)
+//     this.course = course;
+// }
 
-mike.calcAge();
+// // joining prototypes of bth objects person to student connection
+// // At this level student.prototypes it will return empty object
+// // if we would do it after adding some methods, it would overwrite them again to empty object
 
-// So basically because of the Object.create() we pushed JS to think that person construct is for student to
-// by code below we can fix it. !IMPORTANT 
-//Strange i had no error like it! LOL
+// //linking prototype
+// Student.prototype = Object.create(Person.prototype);
+// // why we can not do something like this?:
+// // Student.prototype = Person.prototype;  // it would point the same thing!
 
 
-console.log(mike instanceof Student)
-console.log(mike instanceof Person)
+// Student.prototype.introduce = function () {
+//     console.log(`My name is ${this.firstName} and I study ${this.course}`)
+// }
 
-Student.prototype.constructor = Student;
+// const mike = new Student('Mike', 2020, 'Computer Science')
+// console.log(mike)
+// mike.introduce()
 
-console.log(mike instanceof Student)
-console.log(mike instanceof Person)
+// // check time!
 
-console.dir(Student.prototype.constructor)
-// console.log(Person.prototype.constructor)
+// console.log(mike.__proto__)
+// console.log(mike.__proto__.__proto__)
 
 // mike.calcAge();
-// mike.calcAge();
 
-console.dir(mike.__proto__)
-console.dir(Student.prototype.constructor)
+// // So basically because of the Object.create() we pushed JS to think that person construct is for student to
+// // by code below we can fix it. !IMPORTANT 
+// //Strange i had no error like it! LOL
+
+
+// console.log(mike instanceof Student)
+// console.log(mike instanceof Person)
+
+// Student.prototype.constructor = Student;
+
+// console.log(mike instanceof Student)
+// console.log(mike instanceof Person)
+
+// console.dir(Student.prototype.constructor)
+// // console.log(Person.prototype.constructor)
+
+// // mike.calcAge();
+// // mike.calcAge();
+
+// console.dir(mike.__proto__)
+// console.dir(Student.prototype.constructor)
+
+
+// console.log('*'.repeat(30) + "Video 214 " + '*'.repeat(30))
+// // Video 214. Coding Challenge #3
+
+// ///////////////////////////////////////
+// // Coding Challenge #3
+// const CarsFunctionConstructorSolution = function (make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+// }
+
+// CarsFunctionConstructorSolution.prototype.accelerate = function () {
+//     this.speed += 10;
+//     console.log(`Speed ${this.speed} km/h`)
+// }
+
+// CarsFunctionConstructorSolution.prototype.brake = function () {
+//     this.speed -= 5;
+//     console.log(`Speed ${this.speed} km/h`)
+// }
+
+// // 2. Add a getter called 'speedUS' which returns the current speed in mi / h(divide by 1.6);
+// // 3. Add a setter called 'speedUS' which sets the current speed in mi / h(but converts it to km / h 
+// //before storing the value, by multiplying the input by 1.6);
+
+// // get speedUS() {
+// //     return this.speed / 1.6
+// // }
+// // // always one argument
+// // set speedUS(speed) {
+// //     this.speed = speed * 1.6
+// // }
+
+// // const CarsProto = {
+// //     init(make, speed) {
+// //         this.make = make;
+// //         this.speed = speed;
+// //     },
+
+// //     accelerate() {
+// //         this.speed += 10;
+// //         console.log(`Speed ${this.speed} km/h`)
+// //     },
+
+// //     brake() {
+// //         this.speed -= 5;
+// //         console.log(`Speed ${this.speed} km/h`)
+// //     },
+
+// //     get speedUS() {
+// //         return this.speed / 1.6
+// //     },
+// //     // always one argument
+// //     set speedUS(speed) {
+// //         this.speed = speed * 1.6
+// //     },
+// // }
+
+// /*
+// 1. Use a constructor function to implement an Electric Car (called EV) as a CHILD "class" of Car. Besides a make and current speed, the EV also has the current battery charge in % ('charge' property);
+// 2. Implement a 'chargeBattery' method which takes an argument 'chargeTo' and sets the battery charge to 'chargeTo';
+// 3. Implement an 'accelerate' method that will increase the car's speed by 20, and decrease the charge by 1%. Then log a message like this: 'Tesla going at 140 km/h, with a charge of 22%';
+// 4. Create an electric car object and experiment with calling 'accelerate', 'brake' and 'chargeBattery' (charge to 90%). Notice what happens when you 'accelerate'! HINT: Review the definiton of polymorphism 😉
+
+// DATA CAR 1: 'Tesla' going at 120 km/h, with a charge of 23%
+
+// GOOD LUCK 😀
+// */
+
+
+
+// const EV = function (make, speed, charge) {
+//     CarsFunctionConstructorSolution.call(this, make, speed);
+//     this.charge = charge;
+// }
+// // prototypes
+// //!IMPORTANT I forgot about it: 
+// EV.prototype = Object.create(CarsFunctionConstructorSolution.prototype)
+
+
+// EV.prototype.chargeBattery = function (chargeTo) {
+//     this.charge = chargeTo
+// };
+
+// EV.prototype.accelerate = function () {
+//     this.speed += 20;
+//     this.charge--;
+//     console.log(`Tesla going at ${this.speed} km/h, with a charge of ${this.charge}%`);
+// }
+
+
+// // EV.prototype.constructor = EV;
+
+// const tesla = new EV("TESLA", 50, 90);
+// console.log(tesla)
+// console.log(tesla instanceof EV)
+// console.log(tesla instanceof CarsFunctionConstructorSolution)
+
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.chargeBattery(90)
+// tesla.accelerate();
+
+// console.log(tesla)
+
+
+// console.log('*'.repeat(30) + "Video 214 " + '*'.repeat(30))
+// Video 215 Inheritance Between "Classes": ES6 Classes
+
+
+class PersonCL {
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+    }
+
+
+    //Methods
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    }
+
+    greet() {
+        console.log(`Hey ${this.fullName}`);
+    }
+
+    get age() {
+        return 2037 - this.birthYear;
+    }
+
+    set fullName(name) {
+        if (name.includes(' ')) this._fullName = name;
+        else alert(`${name} is not a full name!`);
+    }
+
+    //static method
+    static hey() {
+        console.log(`Hey there`);
+    }
+}
+
+
+// Again classes are only abstraction of real things taking place behind scene
+
+class StudentCL extends PersonCL {
+    constructor(fullName, birthYear, course) {
+        // super is a constructor of parent class - calling the constructor basically
+        //it always have to happen first because it is resposible to create this in this superclass hmm
+        super(fullName, birthYear)
+        //now we can acccess the this key
+        this.course = course; // this is not obligatory, because instance can have the same properties but different methods
+    }
+
+    //it overwrite the method 1st to go in chain, must be use! 
+    calcAge() {
+        console.log(`I'm ${2037 - this.birthYear}`);
+    }
+}
+
+
+const martha = new StudentCL('Martha Jones', 2012, 'Computer Science');
+
+console.log(martha)
+martha.calcAge()
