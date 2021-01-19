@@ -267,6 +267,146 @@ Person.hey()
 PersonCL.hey();
 
 
-console.log('*'.repeat(60))
+console.log('*'.repeat(60) + "Video 211 ")
 
 // video 211 Object.create
+
+const PersonProto = {
+    calcAge() {
+        console.log(2038 - this.birthYear);
+    },
+    // it is looking like constructor function but it has onthing to do with it, because we do no use new key word
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+}
+
+
+// empty object linked to the prototype of PErsonProto. 
+const steven = Object.create(PersonProto)
+
+// populate the object manually
+steven.name = 'Steven';
+steven.birthYear = 2002;
+steven.calcAge()
+
+//verification
+
+console.log(steven.__proto__)
+console.log(steven.__proto__ === PersonProto)
+
+const sarah = Object.create(PersonProto)
+
+// function which is going to 
+// this has nothing common with constructor or new key word
+sarah.init('Sarah', 1979)
+sarah.calcAge()
+
+console.log('*'.repeat(30) + "Video 212 " + '*'.repeat(30))
+// 212 Coding Challenge #2
+
+///////////////////////////////////////
+// Coding Challenge #2
+
+/*
+1. Re-create challenge 1, but this time using an ES6 class; // I did it by Object.create()
+        /*
+        1. Use a constructor function to implement a Car. A car has a make and a speed property. 
+        The speed property is the current speed of the car in km/h;
+        2. Implement an 'accelerate' method that will increase the car's speed by 10, and log the new speed to the console;
+        3. Implement a 'brake' method that will decrease the car's speed by 5, and log the new speed to the console;
+        4. Create 2 car objects and experiment with calling 'accelerate' and 'brake' multiple times on each of them.
+
+        DATA CAR 1: 'BMW' going at 120 km/h
+        DATA CAR 2: 'Mercedes' going at 95 km/h
+
+2. Add a getter called 'speedUS' which returns the current speed in mi/h (divide by 1.6);
+3. Add a setter called 'speedUS' which sets the current speed in mi/h (but converts it to km/h before storing the value, by multiplying the input by 1.6);
+4. Create a new car and experiment with the accelerate and brake methods, and with the getter and setter.
+
+DATA CAR 1: 'Ford' going at 120 km/h
+
+GOOD LUCK 😀
+*/
+
+class CarsClasssSolution {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+
+    accelerate() {
+        this.speed += 10;
+        console.log(`Speed ${this.speed} km/h`)
+    }
+
+    brake() {
+        this.speed -= 5;
+        console.log(`Speed ${this.speed} km/h`)
+    }
+
+    // 2. Add a getter called 'speedUS' which returns the current speed in mi / h(divide by 1.6);
+    // 3. Add a setter called 'speedUS' which sets the current speed in mi / h(but converts it to km / h 
+    //before storing the value, by multiplying the input by 1.6);
+
+    get speedUS() {
+        return this.speed / 1.6
+    }
+    // always one argument
+    set speedUS(speed) {
+        this.speed = speed * 1.6
+    }
+}
+
+const CarsProto = {
+    init(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    },
+
+    accelerate() {
+        this.speed += 10;
+        console.log(`Speed ${this.speed} km/h`)
+    },
+
+    brake() {
+        this.speed -= 5;
+        console.log(`Speed ${this.speed} km/h`)
+    },
+
+    // 2. Add a getter called 'speedUS' which returns the current speed in mi / h(divide by 1.6);
+    // 3. Add a setter called 'speedUS' which sets the current speed in mi / h(but converts it to km / h 
+    //before storing the value, by multiplying the input by 1.6);
+
+    get speedUS() {
+        return this.speed / 1.6
+    },
+    // always one argument
+    set speedUS(speed) {
+        this.speed = speed * 1.6
+    },
+}
+
+
+
+const bmwProto = Object.create(CarsProto)
+bmwProto.init("bmw", 100);
+bmwProto.brake();
+bmwProto.accelerate();
+console.log(bmwProto.speedUS)
+
+bmwProto.speedUS = 100
+console.log(bmwProto)
+bmwProto.brake();
+bmwProto.accelerate();
+
+const volvo = new CarsClasssSolution('Volvo', 90);
+console.log(volvo);
+
+volvo.accelerate();
+console.log(volvo.speedUS);
+
+
+console.log('*'.repeat(30) + "Video 213 " + '*'.repeat(30))
+// Video 213. Inheritance Betweeen "Classes": Constructor Functions
