@@ -598,61 +598,130 @@ console.log('*'.repeat(30) + "Video 213 " + '*'.repeat(30))
 // console.log(tesla)
 
 
-// console.log('*'.repeat(30) + "Video 214 " + '*'.repeat(30))
+console.log('*'.repeat(30) + "Video 214 " + '*'.repeat(30))
 // Video 215 Inheritance Between "Classes": ES6 Classes
 
 
-class PersonCL {
-    constructor(fullName, birthYear) {
-        this.fullName = fullName;
-        this.birthYear = birthYear;
-    }
+// class PersonCL {
+//     constructor(fullName, birthYear) {
+//         this.fullName = fullName;
+//         this.birthYear = birthYear;
+//     }
 
 
-    //Methods
-    calcAge() {
-        console.log(2037 - this.birthYear);
-    }
+//     //Methods
+//     calcAge() {
+//         console.log(2037 - this.birthYear);
+//     }
 
-    greet() {
-        console.log(`Hey ${this.fullName}`);
-    }
+//     greet() {
+//         console.log(`Hey ${this.fullName}`);
+//     }
 
-    get age() {
-        return 2037 - this.birthYear;
-    }
+//     get age() {
+//         return 2037 - this.birthYear;
+//     }
 
-    set fullName(name) {
-        if (name.includes(' ')) this._fullName = name;
-        else alert(`${name} is not a full name!`);
-    }
+//     set fullName(name) {
+//         if (name.includes(' ')) this._fullName = name;
+//         else alert(`${name} is not a full name!`);
+//     }
 
-    //static method
-    static hey() {
-        console.log(`Hey there`);
-    }
-}
-
-
-// Again classes are only abstraction of real things taking place behind scene
-
-class StudentCL extends PersonCL {
-    constructor(fullName, birthYear, course) {
-        // super is a constructor of parent class - calling the constructor basically
-        //it always have to happen first because it is resposible to create this in this superclass hmm
-        super(fullName, birthYear)
-        //now we can acccess the this key
-        this.course = course; // this is not obligatory, because instance can have the same properties but different methods
-    }
-
-    //it overwrite the method 1st to go in chain, must be use! 
-    calcAge() {
-        console.log(`I'm ${2037 - this.birthYear}`);
-    }
-}
+//     //static method
+//     static hey() {
+//         console.log(`Hey there`);
+//     }
+// }
 
 
-const martha = new StudentCL('Martha Jones', 2012, 'Computer Science');
+// // Again classes are only abstraction of real things taking place behind scene
 
-console.log(martha)
-martha.calcAge()
+// class StudentCL extends PersonCL {
+//     constructor(fullName, birthYear, course) {
+//         // super is a constructor of parent class - calling the constructor basically
+//         //it always have to happen first because it is resposible to create this in this superclass hmm
+//         super(fullName, birthYear)
+//         //now we can acccess the this key
+//         this.course = course; // this is not obligatory, because instance can have the same properties but different methods
+//     }
+
+//     //it overwrite the method 1st to go in chain, must be use! 
+//     calcAge() {
+//         console.log(`I'm ${2037 - this.birthYear}`);
+//     }
+// }
+
+
+// const martha = new StudentCL('Martha Jones', 2012, 'Computer Science');
+
+// console.log(martha)
+// martha.calcAge()
+
+console.log('*'.repeat(30) + "Video 214 " + '*'.repeat(30))
+
+// // video 216 Inheritance Between "Classes": Object.create
+
+
+// const PersonProto = {
+//     calcAge() {
+//         console.log(2037 - this.birthYear);
+//     },
+
+//     init(firstName, birthYear) {
+//         this.firstName = firstName;
+//         this.birthYear = birthYear
+//     },
+// };
+
+// const steven = Object.create(PersonProto);
+
+// const StudentProto = Object.create(PersonProto)
+// StudentProto.init = function (firstName, birthYear, course) {
+//     PersonProto.init.call(this, firstName, birthYear);
+//     this.course = course;
+// }
+
+// const jay = Object.create(StudentProto)
+// jay.init("Jay", 2010, "Computer Science");
+
+// console.log('*'.repeat(30) + "Video 214 " + '*'.repeat(30))
+// //video  217 Another Class Example
+
+
+// class Account {
+//     constructor(owner, currency, pin) {
+//         this.owner = owner;
+//         this.currency = currency;
+//         this.pin = pin;
+//         // normal we can specify default values at the beginning
+//         this.movements = [];
+
+//         console.log(`Thank You for opening an account ${owner}`)
+//     }
+//     // public interface - beeeettterr than manipulating directly on properties
+//     deposit(val) {
+//         this.movements.push(val);
+//     }
+//     withdraw(val) {
+//         this.deposit(-val)
+//     }
+// }
+
+// const acc1 = new Account('Jonas', 'EUR', 1111)
+// console.log(acc1)
+
+// //so basically we can do movements by array method() 
+// // but it is not good idea at all! 
+// // it is specially true if you need to track very important data by creating the deposit and withdraw methods
+// // acc1.movements.push(250);
+// // acc1.movements.push(-140);
+
+// // this is small abstraction but very useful.
+// acc1.deposit(250);
+// acc1.deposit(300);
+// console.log(acc1);
+
+console.log('*'.repeat(30) + "Video 214 " + '*'.repeat(30))
+// video 218 Encapsulation: Protected Properties and Methods
+
+
